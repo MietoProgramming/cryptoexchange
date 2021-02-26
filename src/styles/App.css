@@ -1,0 +1,8 @@
+.text-over-img {
+  position: absolute;
+  top: 22%;
+  left: 20px;
+  /* z-index: 1000; */
+  color: white;
+  font-style: italic;
+}

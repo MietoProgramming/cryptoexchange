@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital@0;1&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Newsreader", serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
