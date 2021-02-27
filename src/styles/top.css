@@ -1,0 +1,13 @@
+.sidecard {
+  max-width: 350px;
+}
+
+.text-warning .list-group-item {
+  border-color: #ffc107;
+}
+
+@media (min-width: 1700px) {
+  .container {
+    max-width: 1700px;
+  }
+}

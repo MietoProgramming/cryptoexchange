@@ -6,3 +6,7 @@
   color: white;
   font-style: italic;
 }
+
+.App {
+  min-height: 100vh;
+}
