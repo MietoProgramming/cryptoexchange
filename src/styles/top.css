@@ -6,6 +6,18 @@
   border-color: #ffc107;
 }
 
+.navbar {
+  z-index: 1111;
+}
+
+.my-bg-grey {
+  background-color: rgb(14, 14, 14);
+}
+
+.my-bg-grey .list-group-item {
+  background-color: rgb(71, 71, 71);
+}
+
 @media (min-width: 1700px) {
   .container {
     max-width: 1700px;

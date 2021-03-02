@@ -5,6 +5,7 @@ import { Main } from "./components/homepage/Main";
 import { Footer } from "./components/Footer";
 import { About } from "./components/about/About";
 import { Top } from "./components/top/Top";
+import { Calculator } from "./components/calculator/Calculator";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 
@@ -21,9 +22,7 @@ function App() {
             <Top />
           </Route>
           <Route exact path="/calculator">
-            <div>
-              <h1>person</h1>
-            </div>
+            <Calculator />
           </Route>
           <Route exact path="/about">
             <About />

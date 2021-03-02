@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { cryptoKey } from "../../apiKeys.js";
 import "../../styles/top.css";
+import { TopFiveItem } from "./TopFiveItem";
+import { BestCurrenciesItem } from "./BestCurrenciesItem";
 
 export const Top = () => {
   const [currency, setCurrency] = useState([]);
+  const [topFiveCurrencies, setTopFiveCurrencies] = useState([]);
+  const [topTenHighestValueCurrencies, setTopHighestValueCurrencies] = useState(
+    []
+  );
 
   const getDataOnline = () =>
     fetch(`https://www.worldcoinindex.com/apiservice/json?key=${cryptoKey}`)
       .then((res) => res.json())
       .then((data) => console.log(data));
 
-  const getData = () =>
-    fetch("../../currencyData.json", {
+  const getData = async () => {
+    let curr;
+    await fetch("../../currencyData.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -19,13 +26,26 @@ export const Top = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        return res;
+        console.log(res.Markets);
+        curr = res.Markets;
       });
 
+    setTopFiveCurrencies(
+      curr.sort((a, b) => b.Volume_24h - a.Volume_24h).slice(0, 5)
+    );
+
+    setTopHighestValueCurrencies(
+      curr.sort((a, b) => b.Volume_24h - a.Volume_24h).slice(0, 10)
+    );
+
+    return curr;
+  };
+
   useEffect(async () => {
-    const coins = await getData();
-    console.log(coins.Markets[0].Name); // TODO: example of using data
+    await setCurrency(getData());
+    // console.log(currency.Markets[0].Name);
+    // const coins = await getData();
+    // console.log(coins.Markets[0].Name); // TODO: example of using data
   }, []);
 
   return (
@@ -35,14 +55,12 @@ export const Top = () => {
         <div className="col"></div>
         <div className="col"></div>
         <div className="col-12-md sidecard">
-          <div className="card">
+          <div className="card my-bg-grey text-white">
             <div className="card-header">Top 5</div>
             <div className="list-group list-group-flush">
-              <li className="list-group-item">BitCoin $</li>
-              <li className="list-group-item">BitCoin $</li>
-              <li className="list-group-item">BitCoin $</li>
-              <li className="list-group-item">BitCoin $</li>
-              <li className="list-group-item">BitCoin $</li>
+              {topFiveCurrencies.map((c, index) => (
+                <TopFiveItem key={index} name={c.Name} />
+              ))}
             </div>
           </div>
         </div>
@@ -50,101 +68,9 @@ export const Top = () => {
       <div className="row justify-content-center">
         <div>
           <div className="list-group">
-            <div className="list-group-item list-group-item-action bg-dark">
-              <div className="d-flex justify-content-between">
-                <h1>BitCoin</h1>
-                <small>$8.37</small>
-              </div>
-              <h3>Prices:</h3>
-              <div className="list-group list-group-flush text-warning">
-                <li className="list-group-item bg-dark">
-                  Price_btc : 0.00078805
-                </li>
-                <li className="list-group-item bg-dark">
-                  Price_btc : 0.00078805
-                </li>
-                <li className="list-group-item bg-dark">
-                  Price_btc : 0.00078805
-                </li>
-                <li className="list-group-item bg-dark">
-                  Price_btc : 0.00078805
-                </li>
-                <li className="list-group-item bg-dark">
-                  Price_btc : 0.00078805
-                </li>
-              </div>
-            </div>
-
-            <div className="list-group-item list-group-item-action">
-              <div className="d-flex justify-content-between">
-                <h1>BitCoin</h1>
-                <small>$8.37</small>
-              </div>
-              <h3>Prices:</h3>
-              <div className="list-group list-group-flush">
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-              </div>
-            </div>
-            <div className="list-group-item list-group-item-action">
-              <div className="d-flex justify-content-between">
-                <h1>BitCoin</h1>
-                <small>$8.37</small>
-              </div>
-              <h3>Prices:</h3>
-              <div className="list-group list-group-flush">
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-              </div>
-            </div>
-            <div className="list-group-item list-group-item-action">
-              <div className="d-flex justify-content-between">
-                <h1>BitCoin</h1>
-                <small>$8.37</small>
-              </div>
-              <h3>Prices:</h3>
-              <div className="list-group list-group-flush">
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-              </div>
-            </div>
-            <div className="list-group-item list-group-item-action">
-              <div className="d-flex justify-content-between">
-                <h1>BitCoin</h1>
-                <small>$8.37</small>
-              </div>
-              <h3>Prices:</h3>
-              <div className="list-group list-group-flush">
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-              </div>
-            </div>
-            <div className="list-group-item list-group-item-action">
-              <div className="d-flex justify-content-between">
-                <h1>BitCoin</h1>
-                <small>$8.37</small>
-              </div>
-              <h3>Prices:</h3>
-              <div className="list-group list-group-flush">
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-                <li className="list-group-item">Price_btc : 0.00078805</li>
-              </div>
-            </div>
+            {topTenHighestValueCurrencies.map((c, index) => (
+              <BestCurrenciesItem coin={c} />
+            ))}
           </div>
         </div>
       </div>
