@@ -8,8 +8,8 @@ export const Calculator = () => {
   );
   const [inputCurrencyValue, setInputCurrencyValue] = useState(0);
   const [currentCurrenciesValues, setCurrentCurrenciesValues] = useState({
-    firstValue: {},
-    secondValue: {},
+    firstValue: "",
+    secondValue: "",
   });
   const [resultCurrencyValue, setResultCurrencyValue] = useState(0);
   const [lastCalculations, setLastCalculations] = useState([]);
@@ -31,8 +31,7 @@ export const Calculator = () => {
     await setTopHighestValueCurrencies(
       curr.sort((a, b) => b.Volume_24h - a.Volume_24h).slice(0, 10)
     );
-
-    await setCurrentCurrenciesValues({
+    setCurrentCurrenciesValues({
       firstValue: topTenHighestValueCurrencies[0],
       secondValue: topTenHighestValueCurrencies[0],
     });
@@ -41,6 +40,16 @@ export const Calculator = () => {
   };
 
   const exchangeCurrencies = () => {
+    if (
+      currentCurrenciesValues.firstValue === undefined ||
+      currentCurrenciesValues.secondValue === undefined
+    ) {
+      setCurrentCurrenciesValues({
+        firstValue: topTenHighestValueCurrencies[0],
+        secondValue: topTenHighestValueCurrencies[0],
+      });
+    }
+
     const res =
       Math.floor(
         ((currentCurrenciesValues.firstValue.Price_usd * inputCurrencyValue) /
@@ -66,6 +75,8 @@ export const Calculator = () => {
     };
     getDataAsync();
   }, []);
+
+  useEffect(() => {}, [lastCalculations]);
 
   return (
     <div className="col h-90vh">
