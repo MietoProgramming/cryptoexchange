@@ -1,0 +1,13 @@
+.h-90vh {
+  min-height: 90vh;
+}
+
+.card {
+  padding: 60px 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(58, 58, 58, 0.6);
+}
+
+.bg-transparent {
+  background-color: rgba(0, 0, 0, 0);
+}

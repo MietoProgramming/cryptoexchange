@@ -41,8 +41,11 @@ export const Top = () => {
     return curr;
   };
 
-  useEffect(async () => {
-    await setCurrency(getData());
+  useEffect(() => {
+    const getDataAsync = async () => {
+      await setCurrency(getData());
+    };
+    getDataAsync();
     // console.log(currency.Markets[0].Name);
     // const coins = await getData();
     // console.log(coins.Markets[0].Name); // TODO: example of using data
