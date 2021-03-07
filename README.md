@@ -1,4 +1,4 @@
-### Exchange platform
+# Exchange platform
 
 Mini exchange platform created using React and Bootstrap
 
