@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/calculator.css";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchDataOffline } from "../../actions";
 
 export const Calculator = () => {
-  const [currency, setCurrency] = useState([]); //TODO: implement redux and delete all data repeats
+  const currency = useSelector((state) => state.currencies);
+  const dispatch = useDispatch((e) => dispatch(e)); //Change on fetchDataOnline and add your apiKey to use online option
   const [topTenHighestValueCurrencies, setTopHighestValueCurrencies] = useState(
     []
   );
@@ -14,29 +17,8 @@ export const Calculator = () => {
   const [resultCurrencyValue, setResultCurrencyValue] = useState(0);
   const [lastCalculations, setLastCalculations] = useState([]);
 
-  const getData = async () => {
-    let curr;
-    await fetch("../../currencyData.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res.Markets);
-        curr = res.Markets;
-      });
-
-    await setTopHighestValueCurrencies(
-      curr.sort((a, b) => b.Volume_24h - a.Volume_24h).slice(0, 10)
-    );
-    setCurrentCurrenciesValues({
-      firstValue: topTenHighestValueCurrencies[0],
-      secondValue: topTenHighestValueCurrencies[0],
-    });
-
-    return curr;
+  const getData = () => {
+    dispatch({ type: "FETCH_OFFLINE" }); //TODO: don't want to save fatched state
   };
 
   const exchangeCurrencies = () => {
@@ -67,13 +49,18 @@ export const Calculator = () => {
   };
 
   useEffect(() => {
-    const getDataAsync = async () => {
-      await setCurrency(getData());
-    };
-    getDataAsync();
+    getData();
+    setTimeout(() => {
+      setTopHighestValueCurrencies(
+        currency.sort((a, b) => b.Volume_24h - a.Volume_24h).slice(0, 10)
+      );
+      setCurrentCurrenciesValues({
+        firstValue: topTenHighestValueCurrencies[0],
+        secondValue: topTenHighestValueCurrencies[0],
+      });
+      console.log(currency);
+    }, 1000);
   }, []);
-
-  useEffect(() => {}, [lastCalculations]);
 
   return (
     <div className="col h-90vh">
@@ -82,25 +69,25 @@ export const Calculator = () => {
           <div className="card my-5">
             <select
               className="form-select mb-4"
+              defaultValue="-"
               onChange={(s) =>
                 setCurrentCurrenciesValues({
                   secondValue: currentCurrenciesValues.secondValue,
                   firstValue: topTenHighestValueCurrencies.filter(
-                    (e) => e.Name == s.target.value
+                    (e) => e.Name === s.target.value
                   )[0],
                 })
               }
             >
-              <option value="-" selected>
-                ------------
-              </option>
-              {topTenHighestValueCurrencies.map((e, index) => {
-                return (
-                  <option key={index} value={e.Name}>
-                    {e.Name}
-                  </option>
-                );
-              })}
+              <option value="-">------------</option>
+              {topTenHighestValueCurrencies &&
+                topTenHighestValueCurrencies.map((e, index) => {
+                  return (
+                    <option key={index} value={e.Name}>
+                      {e.Name}
+                    </option>
+                  );
+                })}
             </select>
             <div className="input-group input-group-lg">
               <span className="input-group-text">Value:</span>
@@ -129,7 +116,7 @@ export const Calculator = () => {
                 setCurrentCurrenciesValues({
                   firstValue: currentCurrenciesValues.firstValue,
                   secondValue: topTenHighestValueCurrencies.filter(
-                    (e) => e.Name == s.target.value
+                    (e) => e.Name === s.target.value
                   )[0],
                 })
               }
