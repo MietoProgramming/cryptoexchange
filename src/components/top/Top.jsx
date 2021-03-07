@@ -53,11 +53,14 @@ export const Top = () => {
 
   return (
     <div className="container">
+      <div className="bg-img">
+        <img src="./img/btc.jpg" alt="" className="img-fluid" />
+      </div>
       <div className="row justify-content-center mb-3">
         <div className="col"></div>
         <div className="col"></div>
         <div className="col"></div>
-        <div className="col-12-md sidecard">
+        <div className="col-12-md sidecard mt-3">
           <div className="card my-bg-grey text-white">
             <div className="card-header">Top 5</div>
             <div className="list-group list-group-flush">
@@ -68,7 +71,7 @@ export const Top = () => {
           </div>
         </div>
       </div>
-      <div className="row justify-content-center">
+      <div className="row justify-content-center mt-5">
         <div>
           <div className="list-group">
             {topTenHighestValueCurrencies.map((c, index) => (

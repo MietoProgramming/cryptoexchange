@@ -1,5 +1,6 @@
 .sidecard {
   max-width: 350px;
+  z-index: 111;
 }
 
 .text-warning .list-group-item {
@@ -16,6 +17,21 @@
 
 .my-bg-grey .list-group-item {
   background-color: rgb(71, 71, 71);
+}
+
+.bg-img {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  min-height: 400px;
+  max-height: 45vh;
+  width: auto;
+  left: 0;
+}
+
+.bg-img img {
+  min-height: 400px;
+  width: 100%;
 }
 
 @media (min-width: 1700px) {

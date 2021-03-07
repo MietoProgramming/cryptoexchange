@@ -157,7 +157,7 @@ export const Calculator = () => {
           </div>
         </div>
       </div>
-      <div className="row">
+      <div className="row justify-content-center">
         <div className="card">
           <div className="text-center text-light">
             <h1>Last calculations</h1>

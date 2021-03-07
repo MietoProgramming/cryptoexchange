@@ -9,6 +9,7 @@
 
 .App {
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .img-fluid {
