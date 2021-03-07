@@ -4,7 +4,7 @@ import { BsGraphUp } from "react-icons/bs";
 
 export const Header = () => {
   return (
-    <nav className="navbar navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
         <a href="/" className="navbar-brand">
           <IconContext.Provider value={{ className: "text-warning" }}>

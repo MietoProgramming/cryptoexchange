@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { homepageReducers } from './homepage';
+import { currenciesFetchReducer } from './currencies.jsx';
 
 const reducers = combineReducers({
-    homepage: homepageReducers
+    currencies: currenciesFetchReducer
 });
 
 export default reducers;

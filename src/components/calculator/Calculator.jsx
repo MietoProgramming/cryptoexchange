@@ -44,10 +44,7 @@ export const Calculator = () => {
       currentCurrenciesValues.firstValue === undefined ||
       currentCurrenciesValues.secondValue === undefined
     ) {
-      setCurrentCurrenciesValues({
-        firstValue: topTenHighestValueCurrencies[0],
-        secondValue: topTenHighestValueCurrencies[0],
-      });
+      return;
     }
 
     const res =
@@ -94,6 +91,9 @@ export const Calculator = () => {
                 })
               }
             >
+              <option value="-" selected>
+                ------------
+              </option>
               {topTenHighestValueCurrencies.map((e, index) => {
                 return (
                   <option key={index} value={e.Name}>
@@ -134,6 +134,9 @@ export const Calculator = () => {
                 })
               }
             >
+              <option value="-" selected>
+                ------------
+              </option>
               {topTenHighestValueCurrencies.map((e, index) => {
                 return (
                   <option key={index} value={e.Name}>
