@@ -1,7 +1,8 @@
-###Exchange platform
+### Exchange platform
+
 Mini exchange platform created using React and Bootstrap
 
-##Options
+## Options
 
 - Calculate one currency value to another
 - Check top 5 hottest cryptocurrencies
